@@ -9,12 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class SubjectDto {
+public class PlayerGamificationDto {
     private Long id;
-    private String name;
-    private String acronym;
-    private String code;
-    private String studies;
-    private String school;
+    private String playername;
+    private Integer teamLeaderboardId;
+    private Integer individualLeaderboardId;
 }
