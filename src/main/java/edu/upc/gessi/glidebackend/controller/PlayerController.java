@@ -59,6 +59,15 @@ public class PlayerController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @PatchMapping(value = "/{playername}/monitoring/selectedDates", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PlayerMonitoringDto> setDatesMonitoring(@PathVariable("playername") String playerPlayername,
+                                                                  @RequestParam(value = "startDate", required = false) String startDate,
+                                                                  @RequestParam(value = "endDate", required = false) String endDate) {
+        PlayerMonitoringDto playerMonitoringDto = playerService.setPlayerMonitoringDates(playerPlayername, startDate, endDate);
+        return ResponseEntity.ok(playerMonitoringDto);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value ="/{playername}/gamification", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PlayerGamificationDto> getPlayerGamification(@PathVariable("playername") String playerPlayername) {
         PlayerGamificationDto playerGamificationDto = playerService.getPlayerGamification(playerPlayername);
