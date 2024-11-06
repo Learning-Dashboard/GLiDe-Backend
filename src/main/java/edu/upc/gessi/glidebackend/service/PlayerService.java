@@ -12,6 +12,8 @@ public interface PlayerService {
 
     PlayerMonitoringDto setPlayerMonitoring(String playerPlayername, String selectedMetrics, String selectedHistoryMetrics, String selectedBarMetrics);
 
+    PlayerMonitoringDto setPlayerMonitoringDates(String playerPlayername, String startDate, String endDate);
+
     PlayerGamificationDto getPlayerGamification(String individualPlayerPlayername);
 
     List<IndividualPlayerDto> getAllIndividualPlayers();

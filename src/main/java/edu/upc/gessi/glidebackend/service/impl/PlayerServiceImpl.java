@@ -12,6 +12,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -69,6 +72,20 @@ public class PlayerServiceImpl implements PlayerService {
         playerMonitoringEntity.setSelectedBarMetrics(selectedBarMetrics);
         playerMonitoringRepository.save(playerMonitoringEntity);
         return PlayerMonitoringMapper.mapToPlayerMonitoringDto(playerMonitoringEntity);
+    }
+
+    @Override
+    public PlayerMonitoringDto setPlayerMonitoringDates(String playerPlayername, String startDate, String endDate) {
+        IndividualPlayerEntity individualPlayerEntity = individualPlayerRepository.findById(playerPlayername)
+                .orElseThrow(() -> new ResourceNotFoundException("Individual player with playername '" + playerPlayername + "' not found."));
+        PlayerMonitoringEntity playerMonitoringEntity = playerMonitoringRepository.findByIndividualPlayerEntity(individualPlayerEntity);
+        LocalDate sDate = LocalDate.parse(startDate);
+        LocalDate eDate = LocalDate.parse(endDate);
+        playerMonitoringEntity.setStartDate(Date.valueOf(sDate));
+        playerMonitoringEntity.setEndDate(Date.valueOf(eDate));
+        playerMonitoringRepository.save(playerMonitoringEntity);
+        return PlayerMonitoringMapper.mapToPlayerMonitoringDto(playerMonitoringEntity);
+
     }
 
     @Override
