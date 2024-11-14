@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentUserDto {
+    private String username;
     private String learningdashboardUsername;
     private String githubUsername;
     private String taigaUsername;

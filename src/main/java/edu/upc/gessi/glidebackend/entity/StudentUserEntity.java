@@ -15,6 +15,9 @@ import java.util.List;
 public class StudentUserEntity {
 
     @Id
+    @Column(name = "username")
+    private String username;
+
     @Column(name = "learningdashboard_username", nullable = false)
     private String learningdashboardUsername;
 
