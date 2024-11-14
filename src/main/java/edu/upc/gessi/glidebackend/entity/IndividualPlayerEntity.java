@@ -20,7 +20,7 @@ public class IndividualPlayerEntity extends PlayerEntity {
     private TeamPlayerEntity teamPlayerEntity;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "learningdashboard_username", nullable = false)
+    @JoinColumn(name = "student_user_username", nullable = false)
     private StudentUserEntity studentUserEntity;
 
 }
