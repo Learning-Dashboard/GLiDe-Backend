@@ -5,6 +5,7 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
 import edu.upc.gessi.glidebackend.excpetion.AuthorizationException;
+import edu.upc.gessi.glidebackend.excpetion.MissingInformationException;
 import edu.upc.gessi.glidebackend.service.AuthService;
 import org.springframework.stereotype.Service;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
@@ -18,6 +19,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String getTokenMail(String idToken) {
+        if(idToken.isBlank())
+            throw new MissingInformationException("No idToken was provided");
+
         HttpTransport transport = new NetHttpTransport();
         JsonFactory jsonFactory = new GsonFactory();
 
