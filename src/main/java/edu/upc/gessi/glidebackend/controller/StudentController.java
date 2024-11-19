@@ -1,5 +1,6 @@
 package edu.upc.gessi.glidebackend.controller;
 
+import edu.upc.gessi.glidebackend.dto.IndividualPlayerDto;
 import edu.upc.gessi.glidebackend.service.StudentService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,12 @@ public class StudentController {
     public ResponseEntity<?> postLogin(@RequestHeader(HttpHeaders.AUTHORIZATION) String idToken) {
         studentService.getStudent(idToken);
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(value="/players")
+    public ResponseEntity<?> getStudentPlayers(@RequestHeader(HttpHeaders.AUTHORIZATION) String idToken) {
+        List<IndividualPlayerDto> individualPlayerDto = studentService.getStudentPlayers(idToken);
+        return ResponseEntity.ok(individualPlayerDto);
     }
 }
