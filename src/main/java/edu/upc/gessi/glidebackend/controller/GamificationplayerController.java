@@ -37,4 +37,10 @@ public class GamificationplayerController {
         return ResponseEntity.ok(achievements);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(value="/evaluableActions")
+    public ResponseEntity<?> getEvaluableActions() {
+        List<Object> evaluableActions = gamificationService.getEvaluableActions();
+        return ResponseEntity.ok(evaluableActions);
+    }
 }
