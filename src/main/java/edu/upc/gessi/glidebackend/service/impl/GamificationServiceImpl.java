@@ -57,4 +57,15 @@ public class GamificationServiceImpl implements GamificationService {
         }
     }
 
+    @Override
+    public List<Object> getEvaluableActions() {
+        try {
+            String uri = gamificationAPIBaseURL + "/evaluableActions";
+            RestTemplate restTemplate = new RestTemplate();
+            Object[] evaluableActions = restTemplate.getForObject(uri, Object[].class);
+            return Arrays.asList(evaluableActions);
+        } catch (Exception e) {
+            return Collections.singletonList(new ResponseEntity<>("Error! Please try again", HttpStatus.INTERNAL_SERVER_ERROR));
+        }
+    }
 }

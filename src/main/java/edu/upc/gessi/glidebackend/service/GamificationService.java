@@ -9,4 +9,6 @@ public interface GamificationService {
     Object getTeamPlayer(String teamPlayerPlayername);
 
     List<Object> getPlayerAchievements(String teamPlayerPlayername, String attained, String category);
+
+    List<Object> getEvaluableActions();
 }
