@@ -14,15 +14,15 @@ import java.util.List;
 @Service
 public class LeaderboardServiceImpl implements LeaderboardService {
 
+    private final RestTemplate restTemplate = new RestTemplate();
+
     @Value("${gamification.api.base-url}")
     private String gamificationAPIBaseURL;
 
     public Object getLeaderboard(Long leaderboardId) {
         try {
             String uri = gamificationAPIBaseURL + "/leaderboards/" + leaderboardId;
-            RestTemplate restTemplate = new RestTemplate();
-            Object leaderboard = restTemplate.getForObject(uri, Object.class);
-            return leaderboard;
+            return this.restTemplate.getForObject(uri, Object.class);
         }catch (Exception e){
             e.printStackTrace();
             return Collections.singletonList(new ResponseEntity<>("Error!, Please try again", HttpStatus.INTERNAL_SERVER_ERROR));
@@ -32,8 +32,7 @@ public class LeaderboardServiceImpl implements LeaderboardService {
     public List<Object> getLeaderboardResults(Long leaderboardId) {
         try {
             String uri = gamificationAPIBaseURL + "/leaderboards/" + leaderboardId + "/results";
-            RestTemplate restTemplate = new RestTemplate();
-            Object[] leaderboardResults = restTemplate.getForObject(uri, Object[].class);
+            Object[] leaderboardResults = this.restTemplate.getForObject(uri, Object[].class);
             return Arrays.asList(leaderboardResults);
         }catch (Exception e){
             e.printStackTrace();
