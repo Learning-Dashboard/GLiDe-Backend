@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,7 +40,7 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public List<IndividualPlayerDto> getAllIndividualPlayers() {
         List<IndividualPlayerEntity> individualPlayerEntities = individualPlayerRepository.findAll();
-        return individualPlayerEntities.stream().map((individualPlayerEntity) -> PlayerMapper.mapToIndividualPlayerDto(individualPlayerEntity))
+        return individualPlayerEntities.stream().map(PlayerMapper::mapToIndividualPlayerDto)
                 .collect(Collectors.toList());
     }
 

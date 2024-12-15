@@ -14,6 +14,7 @@ import java.util.List;
 @Service
 public class GamificationServiceImpl implements GamificationService {
 
+    private final RestTemplate restTemplate = new RestTemplate();
 
     @Value("${gamification.api.base-url}")
     private String gamificationAPIBaseURL;
@@ -22,9 +23,7 @@ public class GamificationServiceImpl implements GamificationService {
     public Object getIndividualPlayer(String individualPlayerPlayername) {
         try {
             String uri = gamificationAPIBaseURL + "/players/individuals/" + individualPlayerPlayername;
-            RestTemplate restTemplate = new RestTemplate();
-            Object individualPlayer = restTemplate.getForObject(uri, Object.class);
-            return individualPlayer;
+            return this.restTemplate.getForObject(uri, Object.class);
         }catch (Exception e){
             e.printStackTrace();
             return Collections.singletonList(new ResponseEntity<>("Error!, Please try again", HttpStatus.INTERNAL_SERVER_ERROR));
@@ -35,9 +34,7 @@ public class GamificationServiceImpl implements GamificationService {
     public Object getTeamPlayer(String teamPlayerPlayername) {
         try {
             String uri = gamificationAPIBaseURL + "/players/teams/" + teamPlayerPlayername;
-            RestTemplate restTemplate = new RestTemplate();
-            Object teamPlayer = restTemplate.getForObject(uri, Object.class);
-            return teamPlayer;
+            return this.restTemplate.getForObject(uri, Object.class);
         }catch (Exception e){
             e.printStackTrace();
             return Collections.singletonList(new ResponseEntity<>("Error!, Please try again", HttpStatus.INTERNAL_SERVER_ERROR));
@@ -48,8 +45,7 @@ public class GamificationServiceImpl implements GamificationService {
     public List<Object> getPlayerAchievements(String teamPlayerPlayername, String attained, String category) {
         try {
             String uri = gamificationAPIBaseURL + "/players/" + teamPlayerPlayername + "/achievements?attained=" + attained + "&category=" + category;
-            RestTemplate restTemplate = new RestTemplate();
-            Object[] achievements = restTemplate.getForObject(uri, Object[].class);
+            Object[] achievements = this.restTemplate.getForObject(uri, Object[].class);
             return Arrays.asList(achievements);
         }catch (Exception e){
             e.printStackTrace();
@@ -61,8 +57,7 @@ public class GamificationServiceImpl implements GamificationService {
     public List<Object> getEvaluableActions() {
         try {
             String uri = gamificationAPIBaseURL + "/evaluableActions";
-            RestTemplate restTemplate = new RestTemplate();
-            Object[] evaluableActions = restTemplate.getForObject(uri, Object[].class);
+            Object[] evaluableActions = this.restTemplate.getForObject(uri, Object[].class);
             return Arrays.asList(evaluableActions);
         } catch (Exception e) {
             return Collections.singletonList(new ResponseEntity<>("Error! Please try again", HttpStatus.INTERNAL_SERVER_ERROR));

@@ -39,7 +39,7 @@ public class StudentServiceImpl implements StudentService {
         StudentUserEntity studentUserEntity = studentUserRepository.findById(email)
                 .orElseThrow(() -> new ResourceNotFoundException("Student not found"));
         List<IndividualPlayerEntity> individualPlayerEntities = studentUserEntity.getIndividualPlayerEntities();
-        return individualPlayerEntities.stream().map((individualPlayerEntity) -> PlayerMapper.mapToIndividualPlayerDto(individualPlayerEntity))
+        return individualPlayerEntities.stream().map(PlayerMapper::mapToIndividualPlayerDto)
                 .collect(Collectors.toList());
     }
 }
