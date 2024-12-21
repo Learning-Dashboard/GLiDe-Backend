@@ -4,6 +4,7 @@ import edu.upc.gessi.glidebackend.entity.*;
 import edu.upc.gessi.glidebackend.repository.*;
 import edu.upc.gessi.glidebackend.service.ImportDataService;
 import edu.upc.gessi.glidebackend.type.PlayerType;
+import edu.upc.gessi.glidebackend.excpetion.ConstraintViolationException;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -49,6 +50,9 @@ public class ImportDataServiceImpl implements ImportDataService {
 
             Iterable<CSVRecord> records = csvParser.getRecords();
             for (CSVRecord record : records) {
+                if(record.get("Email Address").isBlank() || record.get("Name").isBlank() || record.get("Surname").isBlank() || record.get("Username").isBlank() || record.get("Github Username").isBlank() || record.get("Taiga Username").isBlank() || record.get("Project Name").isBlank() || record.get("Project Github").isBlank() || record.get("Project Taiga").isBlank() || record.get("Project Learningdashboard").isBlank())
+                    throw new ConstraintViolationException("Invalid CSV record");
+
                 StudentUserEntity studentUserEntity = new StudentUserEntity();
                 studentUserEntity.setUsername(record.get("Email Address"));
                 studentUserEntity.setLearningdashboardUsername(record.get("Name") + ' ' + record.get("Surname"));
