@@ -38,15 +38,15 @@ public class ImportDataServiceImpl implements ImportDataService {
     @Autowired
     private PlayerGamificationRepository playerGamificationRepository;
 
-    public void importData(MultipartFile importedData) {
+    public void importData(MultipartFile importedData, String gameSubjectAcronym, Integer gameCourse, String gamePeriod) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(importedData.getInputStream(), StandardCharsets.UTF_8));
              CSVParser csvParser = new CSVParser(fileReader, CSVFormat.DEFAULT.builder().setHeader().setIgnoreHeaderCase(true).setTrim(true).build())) {
 
             LocalDate today = LocalDate.now();
-            LocalDate nextWeek = today.plusWeeks(1);
+            LocalDate lastWeek = today.minusWeeks(1);
 
-            Date startDate = Date.valueOf(today);
-            Date endDate = Date.valueOf(nextWeek);
+            Date startDate = Date.valueOf(lastWeek);
+            Date endDate = Date.valueOf(today);
 
             Iterable<CSVRecord> records = csvParser.getRecords();
             for (CSVRecord record : records) {
@@ -102,8 +102,9 @@ public class ImportDataServiceImpl implements ImportDataService {
                 if (optionalPlayerGamificationEntity.isEmpty()) {
                     PlayerGamificationEntity playerGamificationEntity = new PlayerGamificationEntity();
                     playerGamificationEntity.setIndividualPlayerEntity(individualPlayerEntity);
-                    playerGamificationEntity.setIndividualLeaderboardId(1);
-                    playerGamificationEntity.setTeamLeaderboardId(2);
+                    playerGamificationEntity.setGameSubjectAcronym(gameSubjectAcronym);
+                    playerGamificationEntity.setGameCourse(gameCourse);
+                    playerGamificationEntity.setGamePeriod(gamePeriod);
                     playerGamificationRepository.save(playerGamificationEntity);
                 }
             }

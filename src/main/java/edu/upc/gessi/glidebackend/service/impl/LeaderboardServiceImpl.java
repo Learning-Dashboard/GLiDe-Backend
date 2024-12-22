@@ -19,6 +19,17 @@ public class LeaderboardServiceImpl implements LeaderboardService {
     @Value("${gamification.api.base-url}")
     private String gamificationAPIBaseURL;
 
+    public List<Object> getLeaderboards(String gameSubjectAcronym, Integer gameCourse, String gamePeriod){
+        try{
+            String uri = gamificationAPIBaseURL + "/leaderboards?gameSubjectAcronym=" + gameSubjectAcronym + "&gameCourse=" + gameCourse + "&gamePeriod=" + gamePeriod;
+            Object[] leaderboards = this.restTemplate.getForObject(uri, Object[].class);
+            return Arrays.asList(leaderboards);
+        } catch (Exception e){
+            e.printStackTrace();
+            return Collections.singletonList(new ResponseEntity<>("Error!, Please try again", HttpStatus.INTERNAL_SERVER_ERROR));
+        }
+    }
+
     public Object getLeaderboard(Long leaderboardId) {
         try {
             String uri = gamificationAPIBaseURL + "/leaderboards/" + leaderboardId;

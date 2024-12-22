@@ -12,6 +12,7 @@ import lombok.Setter;
 public class PlayerGamificationDto {
     private Long id;
     private String playername;
-    private Integer teamLeaderboardId;
-    private Integer individualLeaderboardId;
+    private String gameSubjectAcronym;
+    private Integer gameCourse;
+    private String gamePeriod;
 }
