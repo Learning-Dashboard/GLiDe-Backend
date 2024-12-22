@@ -19,8 +19,11 @@ public class ImportDataController {
     private ImportDataService importDataService;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<?> importData(@RequestPart(value = "importedData") MultipartFile importedData) throws IOException {
-        importDataService.importData(importedData);
+    ResponseEntity<?> importData(@RequestPart(value = "importedData") MultipartFile importedData,
+                                 @RequestPart(value = "gameSubjectAcronym") String gameSubjectAcronym,
+                                 @RequestPart(value = "gameCourse") Integer gameCourse,
+                                 @RequestPart(value = "gamePeriod") String gamePeriod) {
+        importDataService.importData(importedData, gameSubjectAcronym, gameCourse, gamePeriod);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 }

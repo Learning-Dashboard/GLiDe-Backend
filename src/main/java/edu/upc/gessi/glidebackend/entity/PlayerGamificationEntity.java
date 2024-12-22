@@ -22,11 +22,14 @@ public class PlayerGamificationEntity {
     @JoinColumn(name = "playername", referencedColumnName = "playername", nullable = false)
     private IndividualPlayerEntity individualPlayerEntity;
 
-    @Column(name = "teamLeaderboardId")
-    private Integer teamLeaderboardId;
+    @Column(name = "gameSubjectAcronym")
+    private String gameSubjectAcronym;
 
-    @Column(name = "individualLeaderboardId")
-    private Integer individualLeaderboardId;
+    @Column(name = "gameCourse")
+    private Integer gameCourse;
+
+    @Column(name = "gamePeriod")
+    private String gamePeriod;
 
 
 }
