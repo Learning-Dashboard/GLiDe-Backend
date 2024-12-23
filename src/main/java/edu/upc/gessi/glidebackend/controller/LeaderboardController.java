@@ -15,7 +15,7 @@ public class LeaderboardController {
 
     private final LeaderboardService leaderboardService;
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4201")
     @GetMapping
     public ResponseEntity<?> getLeaderboards(@RequestParam(value = "gameSubjectAcronym") String gameSubjectAcronym,
                                              @RequestParam(value = "gameCourse") Integer gameCourse,
@@ -24,14 +24,14 @@ public class LeaderboardController {
         return ResponseEntity.ok(leaderboards);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4201")
     @GetMapping(value="/{id}")
     public ResponseEntity<?> getLeaderboard(@PathVariable("id") Long leaderboardId) {
         Object leaderboard = leaderboardService.getLeaderboard(leaderboardId);
         return ResponseEntity.ok(leaderboard);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4201")
     @GetMapping(value="/{id}/results")
     public ResponseEntity<?> getLeaderboardResults(@PathVariable("id") Long leaderboardId) {
         List<Object> leaderboardResults = leaderboardService.getLeaderboardResults(leaderboardId);

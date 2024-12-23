@@ -19,14 +19,14 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4201")
     @PostMapping(value="/login")
     public ResponseEntity<?> postLogin(@RequestHeader(HttpHeaders.AUTHORIZATION) String idToken) {
         studentService.getStudent(idToken);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4201")
     @GetMapping(value="/players")
     public ResponseEntity<?> getStudentPlayers(@RequestHeader(HttpHeaders.AUTHORIZATION) String idToken) {
         List<IndividualPlayerDto> individualPlayerDto = studentService.getStudentPlayers(idToken);
