@@ -61,8 +61,8 @@ public class PlayerController {
     @CrossOrigin(origins = "http://localhost:4201")
     @PatchMapping(value = "/{playername}/monitoring/selectedDates", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PlayerMonitoringDto> setDatesMonitoring(@PathVariable("playername") String playerPlayername,
-                                                                  @RequestParam(value = "startDate", required = false) String startDate,
-                                                                  @RequestParam(value = "endDate", required = false) String endDate) {
+                                                                  @RequestParam(value = "startDate") String startDate,
+                                                                  @RequestParam(value = "endDate") String endDate) {
         PlayerMonitoringDto playerMonitoringDto = playerService.setPlayerMonitoringDates(playerPlayername, startDate, endDate);
         return ResponseEntity.ok(playerMonitoringDto);
     }
