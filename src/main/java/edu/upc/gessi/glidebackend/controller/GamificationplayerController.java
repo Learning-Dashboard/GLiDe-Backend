@@ -14,21 +14,21 @@ public class GamificationplayerController {
 
     private GamificationService gamificationService;
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4201")
     @GetMapping(value="/players/individuals/{playername}")
     public ResponseEntity<?> getIndividualPlayer(@PathVariable("playername") String individualPlayerPlayername) {
         Object individualPlayer = gamificationService.getIndividualPlayer(individualPlayerPlayername);
         return ResponseEntity.ok(individualPlayer);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4201")
     @GetMapping(value="/players/teams/{playername}")
     public ResponseEntity<?> getTeamPlayer(@PathVariable("playername") String teamPlayerPlayername) {
         Object teamPlayer = gamificationService.getTeamPlayer(teamPlayerPlayername);
         return ResponseEntity.ok(teamPlayer);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4201")
     @GetMapping(value="/players/{playername}/achievements")
     public ResponseEntity<?> getPlayerAchievements(@PathVariable("playername") String teamPlayerPlayername,
                                                    @RequestParam(value = "attained", required = false) String attained,
@@ -37,7 +37,7 @@ public class GamificationplayerController {
         return ResponseEntity.ok(achievements);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4201")
     @GetMapping(value="/evaluableActions")
     public ResponseEntity<?> getEvaluableActions() {
         List<Object> evaluableActions = gamificationService.getEvaluableActions();
